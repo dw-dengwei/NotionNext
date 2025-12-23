@@ -253,7 +253,7 @@ const LayoutSlug = props => {
             </div>
             <ShareBar post={post} />
             <Comment frontMatter={post} />
-            <ArticleFooter />
+            {/* <ArticleFooter /> */}
           </>
         </div>
       )}
