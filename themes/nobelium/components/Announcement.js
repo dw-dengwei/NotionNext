@@ -7,7 +7,7 @@ const Announcement = ({ notice, className }) => {
     return <div className={className}>
             <section id='announcement-wrapper' className='mb-10'>
                 {notice && (<div id="announcement-content">
-                    <NotionPage post={notice} className='text-center ' />
+                    <NotionPage post={notice} />
                 </div>)}
             </section>
         </div>

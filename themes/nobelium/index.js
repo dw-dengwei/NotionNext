@@ -135,6 +135,8 @@ const LayoutPostList = props => {
   return (
     <>
       {topSlot}
+      <h1 className='text-2xl font-bold'>Posts</h1>
+      <hr className='border-gray-200 dark:border-gray-600' />
       {tag && <SearchNavBar {...props} />}
       {siteConfig('POST_LIST_STYLE') === 'page' ? (
         <BlogListPage {...props} posts={filteredBlogPosts} />
