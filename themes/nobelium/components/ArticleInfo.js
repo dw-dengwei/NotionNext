@@ -19,7 +19,7 @@ export const ArticleInfo = (props) => {
 
             {post?.type !== 'Page' && <>
                 <nav className="flex mt-7 items-start text-gray-500 dark:text-gray-400">
-                    <div className="flex mb-4">
+                    {/* <div className="flex mb-4">
                         <a href={siteConfig('CONTACT_GITHUB', '#')} className="flex">
                             <Image
                                 alt={siteConfig('AUTHOR')}
@@ -34,7 +34,7 @@ export const ArticleInfo = (props) => {
                     </div>
                     <div className="mr-2 mb-4 md:ml-0">
                         {post?.publishDay}
-                    </div>
+                    </div> */}
                     {post?.tags && (
                         <div className="flex flex-nowrap max-w-full overflow-x-auto article-tags">
                             {post?.tags.map(tag => (
