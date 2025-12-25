@@ -250,6 +250,7 @@ const LayoutSlug = props => {
         <div className='px-2'>
           <>
             <ArticleInfo post={post} />
+            <hr />
             <div id='article-wrapper'>
               <NotionPage post={post} />
             </div>
