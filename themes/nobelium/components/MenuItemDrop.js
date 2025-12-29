@@ -1,4 +1,5 @@
 import SmartLink from '@/components/SmartLink'
+import Image from 'next/image'
 import { useState } from 'react'
 
 export const MenuItemDrop = ({ link }) => {
@@ -20,7 +21,52 @@ export const MenuItemDrop = ({ link }) => {
         {!hasSubMenu && (
           <div className='block text-black dark:text-gray-50 nav'>
             <SmartLink href={link?.href} target={link?.target}>
-              {link?.icon && <i className={link?.icon} />} {link?.name}
+              {(() => {
+                // 如果有 icon，直接显示 icon
+                if (link?.icon) {
+                  return <i className={link?.icon} />
+                }
+
+                // 如果没有 icon，检测是否是 GitHub 仓库，如果是则显示 shields 图片
+                if (typeof link?.href === 'string') {
+                  let owner = null
+                  let repo = null
+
+                  // 检测标准 GitHub 仓库 URL: https://github.com/owner/repo
+                  const githubRegex = /^https?:\/\/github\.com\/([^\/]+)\/([^\/]+)(?:\/.*)?$/
+                  const githubMatch = link.href.match(githubRegex)
+                  if (githubMatch) {
+                    owner = githubMatch[1]
+                    repo = githubMatch[2].replace(/\/$/, '') // 移除末尾的斜杠
+                  } else {
+                    // 检测 GitHub Pages URL: https://username.github.io/repo-name
+                    const githubPagesRegex = /^https?:\/\/([^\/]+)\.github\.io\/([^\/]+)(?:\/.*)?$/
+                    const pagesMatch = link.href.match(githubPagesRegex)
+                    if (pagesMatch) {
+                      owner = pagesMatch[1]
+                      repo = pagesMatch[2].replace(/\/$/, '') // 移除末尾的斜杠
+                    }
+                  }
+
+                  if (owner && repo) {
+                    const shieldsUrl = `https://img.shields.io/github/stars/${owner}/${repo}`
+                    return (
+                      <Image
+                        src={shieldsUrl}
+                        alt={`${owner}/${repo} stars`}
+                        width={0}
+                        height={18}
+                        className='inline-block align-middle'
+                        style={{ height: '18px', width: 'auto' }}
+                        unoptimized
+                      />
+                    )
+                  }
+                }
+                return null
+              })()}
+              {' '}
+              {link?.name}
             </SmartLink>
           </div>
         )}
